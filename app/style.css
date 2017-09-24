@@ -27,26 +27,71 @@ li {
 }
 
 .popular-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .popular-item {
-  margin: 20px;
-  text-align: center;
+    margin: 20px;
+    text-align: center;
 }
 
 .space-list-items {
-  margin-bottom: 7px;
+    margin-bottom: 7px;
 }
 
 .avatar {
-  width: 150px;
-  border-radius: 50%;
+    width: 150px;
+    border-radius: 50%;
 }
 
 .popular-rank {
-  font-size: 20px;
-  margin: 10px;
+    font-size: 20px;
+    margin: 10px;
+}
+
+.nav {
+    display: flex;
+}
+
+.active {
+    font-weight: bold;
+}
+
+.nav li {
+    margin-right: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: red;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button {
+    color: red;
+    background: #0a0a0a;
+    border: none;
+    font-size: 16px;
+    border-radius: 3px;
+    width: 200px;
+    text-align: center;
+    display: block;
+    padding: 7px 0;
+    margin: 10px auto;
+}
+
+.button:hover:enabled {
+    background: darkred;
+    color: white;
+}
+
+.button:active {
+    transform: translateY(1px);
 }
