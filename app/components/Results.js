@@ -1,7 +1,23 @@
 import React from 'react';
 import queryString from 'query-string';
 import api from '../utils/api';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import propTypes from 'prop-types';
+
+function Player(props) {
+    return (
+        <div>
+          <h1 className="header">{props.label}</h1>
+          <h3 style={{textAlign: 'center'}}>Score: {props.score}</h3>
+        </div>
+    )
+};
+
+Player.propTypes = {
+    label: propTypes.string.isRequired,
+    score: propTypes.number.isRequired,
+    profile: propTypes.object.isRequired
+};
 
 class Results extends React.Component {
     constructor(props) {
@@ -48,7 +64,10 @@ class Results extends React.Component {
         }
 
         return (
-            <div>Results are here ;-)</div>
+            <div className="row">
+                <Player label="Winner" score={winner.score} profile={winner.profile}/>
+                <Player label="Loser" score={loser.score} profile={loser.profile}/>
+            </div>
         )
     }
 }
