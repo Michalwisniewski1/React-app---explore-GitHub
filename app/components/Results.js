@@ -1,7 +1,7 @@
-var React = require('react');
-var queryString = require('query-string');
-var api = require('../utils/api');
-var Link = require('react-router-dom').Link;
+import React from 'react';
+import queryString from 'query-string';
+import api from '../utils/api';
+import { Link } from 'react-router-dom';
 
 class Results extends React.Component {
     constructor(props) {
@@ -11,19 +11,19 @@ class Results extends React.Component {
             loser: null,
             error: null,
             loading: true
-        }
+        };
     }
     componentDidMount() {
         var players = queryString.parse(this.props.location.search);
         api.battle([players.playerOneName, players.playerTwoName]).then((results) => {
             if (results == null) {
                 return this.setState(() => {
-                    return {error: 'Check your connection! Looks like it is error', loading: false}
+                    return {error: 'Check your connection! Looks like it is error', loading: false};
                 });
             }
             console.log(results);
             this.setState(() => {
-                return {error: null, winner: results[0], loser: results[1], loading: false}
+                return {error: null, winner: results[0], loser: results[1], loading: false};
             });
         });
     }
@@ -48,7 +48,7 @@ class Results extends React.Component {
         }
 
         return (
-            <div>dd</div>
+            <div>Results are here ;-)</div>
         )
     }
 }

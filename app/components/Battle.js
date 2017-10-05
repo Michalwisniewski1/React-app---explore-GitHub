@@ -1,8 +1,8 @@
-var React = require('react');
-var PropTypes = require('prop-types');
-var Link = require('react-router-dom').Link;
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-function PlayerPreview(props) {
+let PlayerPreview = (props) => {
     return (
         <div>
             <div className="col">
@@ -31,9 +31,9 @@ class PlayerInput extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChange(e) {
-        var value = e.target.value;
+        let value = e.target.value;
         console.log(value);
-        this.setState(function() {
+        this.setState(() => {
             return {username: value}
         });
     }
@@ -75,8 +75,8 @@ class Battle extends React.Component {
     }
 
     handleReset(id) {
-        this.setState(function() {
-            var newState = {};
+        this.setState(() => {
+            let newState = {};
             newState[id + 'Name'] = '';
             newState[id + 'Image'] = null;
             return newState;
@@ -84,19 +84,19 @@ class Battle extends React.Component {
     }
 
     handleSubmit(id, username) {
-        this.setState(function() {
-            var newState = {};
+        this.setState(() => {
+            let newState = {};
             newState[id + 'Name'] = username;
             newState[id + 'Image'] = 'https://github.com/' + username + '.png?size=200';
             return newState;
         });
     }
     render() {
-        var match = this.props.match;
-        var playerOneName = this.state.playerOneName;
-        var playerTwoName = this.state.playerTwoName;
-        var playerOneImage = this.state.playerOneImage;
-        var playerTwoImage = this.state.playerTwoImage;
+        let match = this.props.match;
+        let playerOneName = this.state.playerOneName;
+        let playerTwoName = this.state.playerTwoName;
+        let playerOneImage = this.state.playerOneImage;
+        let playerTwoImage = this.state.playerTwoImage;
         return (
             <div>
                 <div className="row">
