@@ -1,25 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-
-const PlayerPreview = (props) => {
-    return (
-        <div>
-            <div className="col">
-                <img className="avatar" src={props.avatar} alt={'Avatar for ' + props.username}/>
-                <h2 className="username">@{props.username}</h2>
-            </div>
-            <buton className="reset" onClick={props.onReset.bind(null, props.id)}>Reset</buton>
-        </div>
-    )
-}
-
-PlayerPreview.propTypes = {
-    avatar: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    onReset: PropTypes.func.isRequired,
-    id: PropTypes.string.isRequired
-}
+import {Link} from 'react-router-dom';
+import PlayerPreview from './PlayerPreview';
 
 class PlayerInput extends React.Component {
     constructor(props) {
@@ -27,12 +9,13 @@ class PlayerInput extends React.Component {
         this.state = {
             username: ''
         }
+        //usunac
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+    // usunac =>
     handleChange(e) {
         let value = e.target.value;
-        console.log(value);
         this.setState(() => {
             return {username: value}
         });
@@ -43,13 +26,14 @@ class PlayerInput extends React.Component {
         this.props.onSubmit(this.props.id, this.state.username)
     }
     render() {
+        let username = this.state.username;
         return (
             <form className="col" onSubmit={this.handleSubmit}>
                 <label className="header" htmlFor="username">
                     {this.props.label}
                 </label>
-                <input id="username" placeholder="Github username" type="text" autoComplete="off" value={this.state.username} onChange={this.handleChange}/>
-                <button className="button" type="submit" disabled={!this.state.username}>Submit</button>
+                <input id="username" placeholder="Github username" type="text" autoComplete="off" value={username} onChange={this.handleChange}/>
+                <button className="button" type="submit" disabled={!username}>Submit</button>
             </form>
         )
     }
@@ -101,9 +85,13 @@ class Battle extends React.Component {
             <div>
                 <div className="row">
                     {!playerOneName && <PlayerInput id="playerOne" label="Player One" onSubmit={this.handleSubmit}/>}
-                    {playerOneImage !== null && <PlayerPreview avatar={playerOneImage} username={playerOneName} onReset={this.handleReset} id="playerOne"/>}
+                    {playerOneImage !== null && <PlayerPreview avatar={playerOneImage} username={playerOneName}>
+                        <buton className="reset" onClick={this.handleReset.bind(null, 'playerOne')}>Reset</buton>
+                    </PlayerPreview>}
                     {!playerTwoName && <PlayerInput id="playerTwo" label="Player Two" onSubmit={this.handleSubmit}/>}
-                    {playerTwoImage !== null && <PlayerPreview avatar={playerTwoImage} username={playerTwoName} onReset={this.handleReset} id="playerOne"/>}
+                    {playerTwoImage !== null && <PlayerPreview avatar={playerTwoImage} username={playerTwoName}>
+                        <buton className="reset" onClick={this.handleReset.bind(null, 'playerTwo')}>Reset</buton>
+                    </PlayerPreview>}
                 </div>
                 {playerOneImage && playerTwoImage && <Link className="button" to={{
                     pathname: match.url + '/results',
@@ -116,4 +104,4 @@ class Battle extends React.Component {
     }
 }
 
-module.exports = Battle;
+export default Battle;

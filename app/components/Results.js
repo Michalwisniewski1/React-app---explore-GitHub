@@ -3,13 +3,36 @@ import queryString from 'query-string';
 import api from '../utils/api';
 import {Link} from 'react-router-dom';
 import propTypes from 'prop-types';
+import PlayerPreview from './PlayerPreview';
+import Loading from './Loading';
 
+const Profile = (props) => {
+    let info = props.info;
+    return (
+        <PlayerPreview avatar={info.avatar_url} username={info.login}>
+            <ul className="space-list-items">
+                {info.name && <li>Name: {info.name}</li>}
+                {info.location && <li>Location: {info.location}</li>}
+                {info.company && <li>Company: {info.company}</li>}
+                <li>Followers: {info.followers}</li>
+                <li>Following: {info.following}</li>
+                <li>Public Repos: {info.public_repos}</li>
+                {info.blog && <li>
+                    <a href={info.blog}>{info.blog}</a>
+                </li>}
+            </ul>
+        </PlayerPreview>
+    )
+};
 
 const Player = (props) => {
     return (
         <div>
-          <h1 className="header">{props.label}</h1>
-          <h3 style={{textAlign: 'center'}}>Score: {props.score}</h3>
+            <h1 className="header">{props.label}</h1>
+            <h3 style={{
+                textAlign: 'center'
+            }}>Score: {props.score}</h3>
+            <Profile info={props.profile}/>
         </div>
     )
 };
@@ -38,7 +61,6 @@ class Results extends React.Component {
                     return {error: 'Check your connection! Looks like it is error', loading: false};
                 });
             }
-            console.log(results);
             this.setState(() => {
                 return {error: null, winner: results[0], loser: results[1], loading: false};
             });
@@ -46,13 +68,13 @@ class Results extends React.Component {
     }
 
     render() {
-        var error = this.state.error;
-        var winner = this.state.winner;
-        var loser = this.state.loser;
-        var loading = this.state.loading;
+        let error = this.state.error;
+        let winner = this.state.winner;
+        let loser = this.state.loser;
+        let loading = this.state.loading;
 
         if (loading == true) {
-            return <p>Loading...</p>
+            return <Loading text="Loading" speed={150}/>
         }
 
         if (error) {
@@ -73,4 +95,4 @@ class Results extends React.Component {
     }
 }
 
-module.exports = Results;
+export default Results;

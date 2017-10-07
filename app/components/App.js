@@ -1,6 +1,6 @@
 import React from 'react';
 import Popular from './Popular';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
 import Nav from './Nav';
 import Home from './Home';
 import Battle from './Battle';
@@ -17,7 +17,7 @@ class App extends React.Component {
                         <Route path='/popular' component={Popular}/>
                         <Route exact path='/battle' component={Battle}/>
                         <Route path='/battle/results' component={Results}/>
-                        <Route render={() =>{
+                        <Route render={() => {
                             return <p>Not Found</p>
                         }}/>
                     </Switch>
@@ -27,4 +27,4 @@ class App extends React.Component {
     }
 }
 
-module.exports = App;
+export default App;

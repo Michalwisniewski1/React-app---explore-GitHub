@@ -29,7 +29,6 @@ const calculateScore = (profile, repos) => {
 
 const handleError = (error) => {
     console.log(error);
-    return null;
 };
 
 const getUserData = (player) => {
@@ -49,15 +48,18 @@ const sortPlayers = (players) => {
     });
 };
 
-module.exports = {
-    battle: (players) => {
-        return axios.all(players.map(getUserData)).then(sortPlayers).catch(handleError)
-    },
-    fetchPopularRepos: (language) => {
-        let encodedURI = window.encodeURI('https://api.github.com/search/repositories?q=stars:>1+language:' + language + '&sort=stars&order=desc&type=Repositories');
+const battle = (players) => {
+    return axios.all(players.map(getUserData)).then(sortPlayers).catch(handleError)
+};
 
-        return axios.get(encodedURI).then((resp) => {
-            return resp.data.items;
-        });
-    }
+const fetchPopularRepos = (language) => {
+    let encodedURI = window.encodeURI('https://api.github.com/search/repositories?q=stars:>1+language:' + language + '&sort=stars&order=desc&type=Repositories');
+    return axios.get(encodedURI).then((resp) => {
+        return resp.data.items;
+    });
+};
+
+export default {
+    battle,
+    fetchPopularRepos
 };
