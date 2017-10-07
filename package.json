@@ -12,7 +12,7 @@
       "react"
     ]
   },
-  "author": "",
+  "author": "michalwisniewski1",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.16.2",
