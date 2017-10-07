@@ -4,11 +4,8 @@ import api from '../utils/api';
 import {Link} from 'react-router-dom';
 import propTypes from 'prop-types';
 
-<<<<<<< HEAD
+
 const Player = (props) => {
-=======
-function Player(props) {
->>>>>>> f120aa25f2d89a24510ba10ffc7edbd57379361e
     return (
         <div>
           <h1 className="header">{props.label}</h1>
