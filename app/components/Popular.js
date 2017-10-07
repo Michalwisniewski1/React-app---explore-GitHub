@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import api from '../utils/api';
 
-let SelectLanguage = (props) => {
+const SelectLanguage = (props) => {
   let languages = [
       'All',
       'JavaScript',
@@ -31,7 +31,7 @@ SelectLanguage.propTypes = {
   onSelect: PropTypes.func.isRequired
 }
 
-let ReposGrid = (props) => {
+const ReposGrid = (props) => {
   return (
     <ul className="popular-list">
         {props.repos.map((repo, index) => {

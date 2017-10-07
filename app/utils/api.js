@@ -4,35 +4,35 @@ let id = "";
 let sec = "";
 let params = "?client_id=" + id + "&client_secret=" + sec;
 
-function getProfile (username) {
+const getProfile = (username) => {
     return axios.get('https://api.github.com/users/' + username + params).then((user) => {
         return user.data;
     });
 };
 
-function getRepos (username) {
+const getRepos = (username) => {
     return axios.get('https://api.github.com/users/' + username + '/repos' + params + '?per_page=100');
 };
 
-function getStarCount (repos) {
+const getStarCount = (repos) => {
     return repos.data.reduce((count, repo) => {
         return count + repo.stargazers_count;
     }, 0);
 };
 
-function calculateScore (profile, repos) {
+const calculateScore = (profile, repos) => {
     let followers = profile.followers;
     let totalStars = getStarCount(repos);
 
     return (followers * 3) + totalStars;
 };
 
-function handleError (error) {
+const handleError = (error) => {
     console.log(error);
     return null;
 };
 
-function getUserData (player) {
+const getUserData = (player) => {
     return axios.all([getProfile(player), getRepos(player)]).then((data) => {
         let profile = data[0];
         let repos = data[1];
@@ -43,7 +43,7 @@ function getUserData (player) {
     });
 };
 
-function sortPlayers (players) {
+const sortPlayers = (players) => {
     return players.sort((a, b) => {
         return b.score - a.score;
     });

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-let PlayerPreview = (props) => {
+const PlayerPreview = (props) => {
     return (
         <div>
             <div className="col">

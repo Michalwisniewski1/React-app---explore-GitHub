@@ -4,7 +4,7 @@ import api from '../utils/api';
 import {Link} from 'react-router-dom';
 import propTypes from 'prop-types';
 
-function Player(props) {
+const Player = (props) => {
     return (
         <div>
           <h1 className="header">{props.label}</h1>
