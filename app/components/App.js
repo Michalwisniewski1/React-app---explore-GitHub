@@ -17,9 +17,7 @@ class App extends React.Component {
                         <Route path='/popular' component={Popular}/>
                         <Route exact path='/battle' component={Battle}/>
                         <Route path='/battle/results' component={Results}/>
-                        <Route render={() => {
-                            return <p>Not Found</p>
-                        }}/>
+                        <Route render={() => <p>Not Found</p>}/>
                     </Switch>
                 </div>
             </BrowserRouter>

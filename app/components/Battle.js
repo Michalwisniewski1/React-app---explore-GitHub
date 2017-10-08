@@ -9,16 +9,14 @@ class PlayerInput extends React.Component {
         this.state = {
             username: ''
         }
-        //usunac
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    // usunac =>
+
     handleChange(e) {
-        let value = e.target.value;
-        this.setState(() => {
-            return {username: value}
-        });
+        const value = e.target.value;
+        this.setState(() => ({username: value}))
     }
 
     handleSubmit(e) {
@@ -26,11 +24,13 @@ class PlayerInput extends React.Component {
         this.props.onSubmit(this.props.id, this.state.username)
     }
     render() {
-        let username = this.state.username;
+        const {username} = this.state;
+        const {label} = this.props;
+
         return (
             <form className="col" onSubmit={this.handleSubmit}>
                 <label className="header" htmlFor="username">
-                    {this.props.label}
+                    {label}
                 </label>
                 <input id="username" placeholder="Github username" type="text" autoComplete="off" value={username} onChange={this.handleChange}/>
                 <button className="button" type="submit" disabled={!username}>Submit</button>
@@ -59,43 +59,36 @@ class Battle extends React.Component {
     }
 
     handleReset(id) {
-        this.setState(() => {
-            let newState = {};
-            newState[id + 'Name'] = '';
-            newState[id + 'Image'] = null;
-            return newState;
-        });
+        this.setState(() => ({
+            [id + 'Name']: '',
+            [id + 'Image']: null
+        }));
     }
 
     handleSubmit(id, username) {
-        this.setState(() => {
-            let newState = {};
-            newState[id + 'Name'] = username;
-            newState[id + 'Image'] = 'https://github.com/' + username + '.png?size=200';
-            return newState;
-        });
+        this.setState(() => ({
+            [id + 'Name']: username,
+            [id + 'Image']: `https://github.com/${username}.png?size=200`
+        }));
     }
     render() {
-        let match = this.props.match;
-        let playerOneName = this.state.playerOneName;
-        let playerTwoName = this.state.playerTwoName;
-        let playerOneImage = this.state.playerOneImage;
-        let playerTwoImage = this.state.playerTwoImage;
+        const {playerOneName, playerTwoName, playerOneImage, playerTwoImage} = this.state;
+        const {match} = this.props;
         return (
             <div>
                 <div className="row">
                     {!playerOneName && <PlayerInput id="playerOne" label="Player One" onSubmit={this.handleSubmit}/>}
                     {playerOneImage !== null && <PlayerPreview avatar={playerOneImage} username={playerOneName}>
-                        <buton className="reset" onClick={this.handleReset.bind(null, 'playerOne')}>Reset</buton>
+                        <buton className="reset" onClick={() => this.handleReset('playerOne')}>Reset</buton>
                     </PlayerPreview>}
                     {!playerTwoName && <PlayerInput id="playerTwo" label="Player Two" onSubmit={this.handleSubmit}/>}
                     {playerTwoImage !== null && <PlayerPreview avatar={playerTwoImage} username={playerTwoName}>
-                        <buton className="reset" onClick={this.handleReset.bind(null, 'playerTwo')}>Reset</buton>
+                        <buton className="reset" onClick={() => this.handleReset('playerTwo')}>Reset</buton>
                     </PlayerPreview>}
                 </div>
                 {playerOneImage && playerTwoImage && <Link className="button" to={{
                     pathname: match.url + '/results',
-                    search: `?playerOneName=` + playerOneName + '&playerTwoName=' + playerTwoName
+                    search: `?playerOneName=${playerOneName}&playerTwoName=${playerTwoName}`
                 }}>
                     Battle
                 </Link>}
